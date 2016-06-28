@@ -1,0 +1,15 @@
+{
+    "app_config": null,
+    "asset_id": "22",
+    "config": {
+        "url": "http://127.0.0.1:8080"
+    },
+    "debug_level": 3,
+    "identifier": "block_arp",
+    "parameters": [
+        { 
+        	"macaddress": "08:0d:0e:0c:0a:01",
+                "priority": 21
+       }
+    ]
+}

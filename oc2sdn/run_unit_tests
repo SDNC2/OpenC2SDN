@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for i in *.py; do
+   module_name=$(basename $i .py)
+   if [[ "$module_name" != "floodlightapp_connector" ]]; then
+      echo "testing $module_name"
+      python -m $module_name
+   fi
+done
+

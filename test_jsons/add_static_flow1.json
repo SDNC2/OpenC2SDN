@@ -1,0 +1,21 @@
+{
+    "app_config": null,
+    "asset_id": "22",
+    "config": {
+        "url": "http://127.0.0.1:8080"
+    },
+    "debug_level": 3,
+    "identifier": "add_static_flow",
+    "parameters": [
+        { 
+            "switch" : "dpid:00-00-00-00-00-00-00-01",
+            "name": "ThisIsMyFlow",
+            "cookie": "9675309",
+            "table": 3,
+            "priority": "10131",
+            "match": "{\"in_port\":\"1\", \"eth_type\":\"0x807\", \"eth_src\":\"00:01:02:0a:0b:0c\", \"eth_dst\": \"ff:ff:ff:ff:ff:ff\"}",
+            "active": "true",
+            "instructions": "{\"instruction_apply_actions\": \"set_field=eth_src->0a:0b:0c:00:00:00,output=controller\"}"
+       }
+    ]
+}

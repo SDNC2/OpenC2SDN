@@ -1,0 +1,24 @@
+{
+    "app_config": null,
+    "asset_id": "22",
+    "config": {
+	"url": "http://127.0.0.1:8080"
+    },
+    "debug_level": 3,
+    "identifier": "block_flow",
+    "parameters": [
+	{ 
+		"src-mac": "08:05:04:03:02:01",
+		"dst-mac": "08:08:08:08:08:08",
+		"src-ip": "11.1.1.1",
+		"tp-src": 121,
+		"dst-ip": "11.1.1.2",
+		"tp-dst": 80,
+		"dl-type": "IPv4",
+		"nw-proto": "TCP",
+		"switchid": "dpid:00-00-00-00-00-00-00-01",
+		"src-inport": "local",
+		"priority": 32007
+       }
+    ]
+}

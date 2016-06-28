@@ -1,0 +1,2049 @@
+{
+	"appid":"4a0585f9-d7e8-4f36-b735-9b3dc35a0b84",
+	"name":"OpenC2 SDN",
+	"description":"Issues OpenC2 actions to SDN actuators via HTTP",
+	"publisher":"SPAWAR Systems Center Atlantic",
+	"package_name":"oc2sdn",
+	"type":"network controller",
+	"license":"Distribution Statement A: Approved for public release: distribution unlimited. ; May 23, 2016",
+	"main_module":"oc2sdn_connector.py",
+	"app_version":"0.0.1",
+	"utctime_updated":"2016-06-28T14:48:00.000000Z",
+	"product_vendor":"OpenC2",
+	"product_name":"OpenC2SDN",
+	"product_version_regex":".*",
+	"min_phantom_version":"1.1.72",
+	"logo":"openc2-logo.png",
+	"configuration":{
+		"url":{
+			"description":"URL of the OpenC2 SDN actuator",
+			"data_type":"string",
+			"required":true
+		}
+		
+	},
+	"actions":[
+		{
+			"action":"test connectivity",
+			"description":"Validate the asset configuration for connectivity.",
+			"type":"test",
+			"identifier":"test_asset_connectivity",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"lock":{
+				"timeout":60
+			},
+			"output":[
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"block ip",
+			"description":"Block traffic to/from the matching IP.",
+			"identifier":"block_ip",
+			"parameters":{
+				"ip_macaddress":{
+					"contains":[
+						"ip"
+					],
+					"data_type":"string",
+					"description":"IP address to block",
+					"order":0,
+					"primary":true,
+					"required":true
+				},
+				"priority":{
+					"data_type":"numeric",
+					"description":"priority of this firewall rule",
+					"order":1,
+					"primary":false,
+					"required":false
+				}
+				
+			},
+			"read_only":false,
+			"type":"contain",
+			"undo":"unblock ip",
+			"render":{
+				"width":12,
+				"title":"Block IP",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"column_name":"Activity ID",
+					"contains":[
+						"activityid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.parameter.src-ip",
+					"data_type":"string",
+					"column_name":"Source IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.parameter.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":8
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"unblock ip",
+			"description":"Unblocks traffic to/from the matching IP",
+			"identifier":"unblock_ip",
+			"parameters":{
+				"ip_macaddress":{
+					"contains":[
+						"ip"
+					],
+					"data_type":"string",
+					"description":"IP address to unblock",
+					"order":0,
+					"primary":true,
+					"required":true
+				},
+				"priority":{
+					"data_type":"numeric",
+					"description":"priority of this firewall rule",
+					"order":1,
+					"primary":false,
+					"required":false
+				}
+				
+			},
+			"read_only":false,
+			"type":"correct",
+			"undo":"block ip",
+			"render":{
+				"width":12,
+				"title":"Unblock IP",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"column_name":"Activity ID",
+					"contains":[
+						"activityid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.parameter.src-ip",
+					"data_type":"string",
+					"column_name":"Source IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.parameter.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":8
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"block mac address",
+			"description":"Block traffic to/from the matching MAC",
+			"identifier":"block_mac",
+			"parameters":{
+				"ip_macaddress":{
+					"contains":[
+						"mac address"
+					],
+					"data_type":"string",
+					"description":"MAC address to block",
+					"order":0,
+					"primary":true,
+					"required":true
+				},
+				"priority":{
+					"data_type":"numeric",
+					"description":"priority of this firewall rule",
+					"order":1,
+					"primary":false,
+					"required":false
+				}
+				
+			},
+			"read_only":false,
+			"type":"contain",
+			"undo":"unblock mac address",
+			"render":{
+				"width":12,
+				"title":"Block MAC Address",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"column_name":"Activity ID",
+					"contains":[
+						"activityid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.parameter.src-ip",
+					"data_type":"string",
+					"column_name":"Source IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.parameter.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":8
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"unblock mac address",
+			"description":"Unblocks traffic to/from the matching MAC.",
+			"identifier":"unblock_mac",
+			"parameters":{
+				"ip_macaddress":{
+					"contains":[
+						"mac address"
+					],
+					"data_type":"string",
+					"description":"MAC to unblock",
+					"order":0,
+					"primary":true,
+					"required":true
+				},
+				"priority":{
+					"data_type":"numeric",
+					"description":"priority of this firewall rule",
+					"order":1,
+					"primary":false,
+					"required":false
+				}
+				
+			},
+			"read_only":false,
+			"type":"correct",
+			"undo":"block mac address",
+			"render":{
+				"width":12,
+				"title":"Unblock MAC Address",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"column_name":"Activity ID",
+					"contains":[
+						"activityid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.parameter.src-ip",
+					"data_type":"string",
+					"column_name":"Source IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.parameter.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":8
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"block subnet",
+			"description":"Block traffic to/from the matching IP subnet.",
+			"identifier":"block_subnet",
+			"parameters":{
+				"ip_macaddress":{
+					"contains":[
+						"cidr"
+					],
+					"data_type":"string",
+					"description":"CIDR prefix and netmask to block",
+					"order":0,
+					"primary":true,
+					"required":true
+				},
+				"priority":{
+					"data_type":"numeric",
+					"description":"priority of this firewall rule",
+					"order":1,
+					"primary":false,
+					"required":false
+				}
+				
+			},
+			"read_only":false,
+			"type":"contain",
+			"undo":"unblock subnet",
+			"render":{
+				"width":12,
+				"title":"Block Subnet",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"column_name":"Activity ID",
+					"contains":[
+						"activityid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.parameter.src-ip",
+					"data_type":"string",
+					"column_name":"Source IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.parameter.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":8
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"unblock subnet",
+			"description":"Unblocks traffic to/from the matching IP subnet.",
+			"identifier":"unblock_subnet",
+			"parameters":{
+				"ip_macaddress":{
+					"contains":[
+						"cidr"
+					],
+					"data_type":"string",
+					"description":"CIDR prefix and net mask to unblock",
+					"order":0,
+					"primary":true,
+					"required":true
+				},
+				"priority":{
+					"data_type":"numeric",
+					"description":"priority of this firewall rule",
+					"order":1,
+					"primary":false,
+					"required":false
+				}
+				
+			},
+			"read_only":false,
+			"type":"correct",
+			"undo":"block subnet",
+			"render":{
+				"width":12,
+				"title":"Unblock Subnet",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"column_name":"Activity ID",
+					"contains":[
+						"activityid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.parameter.src-ip",
+					"data_type":"string",
+					"column_name":"Source IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.parameter.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination IP",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":8
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"block arp",
+			"description":"Block ARP packets sourced from this MAC.",
+			"identifier":"block_arp",
+			"parameters":{
+				"macaddress":{
+					"contains":[
+						"mac address"
+					],
+					"data_type":"string",
+					"description":"MAC address of device to block",
+					"order":0,
+					"primary":true,
+					"required":true
+				},
+				"priority":{
+					"data_type":"numeric",
+					"description":"priority of this firewall rule",
+					"order":1,
+					"primary":false,
+					"required":false
+				}
+				
+			},
+			"read_only":false,
+			"type":"contain",
+			"undo":"unblock arp",
+			"render":{
+				"width":12,
+				"title":"Block ARP",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"column_name":"Activity ID",
+					"contains":[
+						"activityid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"numeric",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":5
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"unblock arp",
+			"description":"Unblock ARP packets sourced from this MAC.",
+			"identifier":"unblock_arp",
+			"parameters":{
+				"macaddress":{
+					"contains":[
+						"mac address"
+					],
+					"data_type":"string",
+					"description":"MAC address of device to unblock",
+					"order":0,
+					"primary":true,
+					"required":true
+				},
+				"priority":{
+					"data_type":"numeric",
+					"description":"priority of this firewall rule",
+					"order":1,
+					"primary":false,
+					"required":false
+				}
+				
+			},
+			"read_only":false,
+			"type":"correct",
+			"undo":"block arp",
+			"render":{
+				"width":12,
+				"title":"Unblock ARP",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"column_name":"Activity ID",
+					"contains":[
+						"activityid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"numeric",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":5
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"block flow",
+			"description":"Block network traffic matching flow parameters.",
+			"type":"contain",
+			"undo":"unblock flow",
+			"identifier":"block_flow",
+			"read_only":false,
+			"parameters":{
+				"src-mac":{
+					"description":"source mac address",
+					"data_type":"string",
+					"contains":[
+						"mac address"
+					],
+					"primary":false,
+					"required":false
+				},
+				"dst-mac":{
+					"description":"destination mac address",
+					"data_type":"string",
+					"contains":[
+						"mac address"
+					],
+					"primary":false,
+					"required":false
+				},
+				"dl-type":{
+					"description":"layer-3 protocol (IPv4 or ARP)",
+					"data_type":"string",
+					"primary":false,
+					"required":false
+				},
+				"src-ip":{
+					"description":"source ip address or cidr",
+					"data_type":"string",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"primary":false,
+					"required":false
+				},
+				"dst-ip":{
+					"description":"destination ip address or cidr",
+					"data_type":"string",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"primary":false,
+					"required":false
+				},
+				"nw-proto":{
+					"description":"layer-4 protocol (TCP, UDP, or ICMP)",
+					"data_type":"string",
+					"primary":false,
+					"required":false
+				},
+				"tp-src":{
+					"description":"layer-4 source port number",
+					"data_type":"numeric",
+					"primary":false,
+					"required":false
+				},
+				"tp-dst":{
+					"description":"layer-4 destination port number",
+					"data_type":"numeric",
+					"primary":false,
+					"required":false
+				},
+				"switchid":{
+					"description":"datapath identifier",
+					"data_type":"string",
+					"contains":[
+						"dpid"
+					],
+					"required":false
+				},
+				"src-inport":{
+					"description":"input port",
+					"data_type":"string",
+					"required":false
+				},
+				"priority":{
+					"description":"priority for this rule",
+					"data_type":"numeric",
+					"required":false
+				}
+				
+			},
+			"render":{
+				"width":12,
+				"title":"Block Flow",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"contains":[
+						"activityid"
+					],
+					"column_name":"Rule ID",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.parameter.src-ip",
+					"data_type":"string",
+					"column_name":"Source Address",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.parameter.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination Address",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":8
+				},
+				{
+					"data_path":"action_result.parameter.nw-proto",
+					"data_type":"string",
+					"column_name":"L4 Protocol",
+					"column_order":9
+				},
+				{
+					"data_path":"action_result.parameter.tp-src",
+					"data_type":"numeric",
+					"column_name":"Source L4 Port",
+					"column_order":10
+				},
+				{
+					"data_path":"action_result.parameter.tp-dst",
+					"data_type":"numeric",
+					"column_name":"Destination L4 Port",
+					"column_order":11
+				},
+				{
+					"data_path":"action_result.parameter.src-inport",
+					"data_type":"string",
+					"column_name":"Dataport ID",
+					"column_order":12
+				},
+				{
+					"data_path":"action_result.parameter.switchid",
+					"data_type":"string",
+					"column_name":"Datapath ID",
+					"contains":[
+						"dpid"
+					],
+					"column_order":13
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"unblock flow",
+			"description":"Unblock network traffic matching flow parameters.",
+			"type":"correct",
+			"undo":"block flow",
+			"identifier":"unblock_flow",
+			"read_only":false,
+			"parameters":{
+				"src-mac":{
+					"description":"source mac address",
+					"data_type":"string",
+					"contains":[
+						"mac address"
+					],
+					"primary":false,
+					"required":false
+				},
+				"dst-mac":{
+					"description":"destination mac address",
+					"data_type":"string",
+					"contains":[
+						"mac address"
+					],
+					"primary":false,
+					"required":false
+				},
+				"dl-type":{
+					"description":"layer-3 protocol (IPv4 or ARP)",
+					"data_type":"string",
+					"primary":false,
+					"required":false
+				},
+				"src-ip":{
+					"description":"source ip address or cidr",
+					"data_type":"string",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"primary":false,
+					"required":false
+				},
+				"dst-ip":{
+					"description":"destination ip address or cidr",
+					"data_type":"string",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"primary":false,
+					"required":false
+				},
+				"nw-proto":{
+					"description":"layer-4 protocol (TCP, UDP, or ICMP)",
+					"data_type":"string",
+					"primary":false,
+					"required":false
+				},
+				"tp-src":{
+					"description":"layer-4 source port number",
+					"data_type":"numeric",
+					"primary":false,
+					"required":false
+				},
+				"tp-dst":{
+					"description":"layer-4 destination port number",
+					"data_type":"numeric",
+					"primary":false,
+					"required":false
+				},
+				"switchid":{
+					"description":"datapath identifier",
+					"data_type":"string",
+					"contains":[
+						"dpid"
+					],
+					"required":false
+				},
+				"src-inport":{
+					"description":"input port",
+					"data_type":"string",
+					"required":false
+				},
+				"priority":{
+					"description":"priority for this rule",
+					"data_type":"numeric",
+					"required":false
+				}
+				
+			},
+			"render":{
+				"width":12,
+				"title":"Unblock Flow",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.status",
+					"data_type":"string",
+					"column_name":"Status",
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.message",
+					"data_type":"string",
+					"column_name":"Message",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.data.*.activityid",
+					"data_type":"string",
+					"contains":[
+						"activityid"
+					],
+					"column_name":"Rule ID",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.parameter.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.parameter.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.parameter.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.parameter.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.parameter.src-ip",
+					"data_type":"string",
+					"column_name":"Source Address",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.parameter.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination Address",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":8
+				},
+				{
+					"data_path":"action_result.parameter.nw-proto",
+					"data_type":"string",
+					"column_name":"L4 Protocol",
+					"column_order":9
+				},
+				{
+					"data_path":"action_result.parameter.tp-src",
+					"data_type":"numeric",
+					"column_name":"Source L4 Port",
+					"column_order":10
+				},
+				{
+					"data_path":"action_result.parameter.tp-dst",
+					"data_type":"numeric",
+					"column_name":"Destination L4 Port",
+					"column_order":11
+				},
+				{
+					"data_path":"action_result.parameter.src-inport",
+					"data_type":"string",
+					"column_name":"Dataport ID",
+					"column_order":12
+				},
+				{
+					"data_path":"action_result.parameter.switchid",
+					"data_type":"string",
+					"column_name":"Datapath ID",
+					"contains":[
+						"dpid"
+					],
+					"column_order":13
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"get firewall status",
+			"description":"Get the enable/disable state of the firewall.",
+			"type":"generic",
+			"identifier":"get_firewall_status",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":1,
+				"title":"Firewall Status",
+				"type":"table",
+				"height":1
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.result",
+					"data_type":"string",
+					"column_name":"Firewall status",
+					"column_order":0
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"enable firewall",
+			"description":"Enable the firewall.",
+			"type":"generic",
+			"identifier":"enable_firewall",
+			"read_only":false,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":1,
+				"title":"Enable Firewall",
+				"type":"table",
+				"height":1
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.details",
+					"data_type":"string",
+					"column_name":"Action Details",
+					"column_order":0
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"disable firewall",
+			"description":"Disable the firewall.",
+			"type":"generic",
+			"identifier":"disable_firewall",
+			"read_only":false,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":1,
+				"title":"Disable Firewall",
+				"type":"table",
+				"height":1
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.details",
+					"data_type":"string",
+					"column_name":"Action Details",
+					"column_order":0
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"delete firewall rule",
+			"description":"Delete a firewall rule.",
+			"type":"correct",
+			"identifier":"delete_firewall_rule",
+			"read_only":false,
+			"parameters":{
+				"activityid":{
+					"description":"rule id to delete",
+					"data_type":"string",
+					"contains":[
+						"activityid"
+					],
+					"primary":true,
+					"required":true
+				}
+				
+			},
+			"render":{
+				"width":1,
+				"title":"Delete Firewall Rule",
+				"type":"table",
+				"height":1
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.status",
+					"data_type":"string",
+					"column_name":"Action Details",
+					"column_order":0
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"list firewall rules",
+			"description":"List firewall rules stored in the controller.",
+			"type":"investigate",
+			"identifier":"list_firewall_rules",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":12,
+				"title":"Firewall Rules",
+				"type":"table",
+				"height":15
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.activityid",
+					"data_type":"string",
+					"contains":[
+						"activityid"
+					],
+					"column_name":"Rule ID",
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.priority",
+					"data_type":"string",
+					"column_name":"Priority",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.action",
+					"data_type":"string",
+					"column_name":"Action",
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.src-mac",
+					"data_type":"string",
+					"column_name":"Source MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.dst-mac",
+					"data_type":"string",
+					"column_name":"Destination MAC",
+					"contains":[
+						"mac address"
+					],
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.dl-type",
+					"data_type":"string",
+					"column_name":"L3 Protocol",
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.src-ip",
+					"data_type":"string",
+					"column_name":"Source Address",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":6
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.dst-ip",
+					"data_type":"string",
+					"column_name":"Destination Address",
+					"contains":[
+						"ip",
+						"cidr"
+					],
+					"column_order":7
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.nw-proto",
+					"data_type":"string",
+					"column_name":"L4 Protocol",
+					"column_order":8
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.tp-src",
+					"data_type":"numeric",
+					"column_name":"Source L4 Port",
+					"column_order":9
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.tp-dst",
+					"data_type":"numeric",
+					"column_name":"Destination L4 Port",
+					"column_order":10
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.src-inport",
+					"data_type":"string",
+					"column_name":"Dataport ID",
+					"column_order":11
+				},
+				{
+					"data_path":"action_result.data.*.firewall_rules.*.switchid",
+					"data_type":"string",
+					"column_name":"Datapath ID",
+					"contains":[
+						"dpid"
+					],
+					"column_order":12
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"list switches",
+			"description":"List SDN switches managed by the controller.",
+			"type":"investigate",
+			"identifier":"list_switches",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":12,
+				"title":"List Switches",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.switches.*.switchDPID",
+					"data_type":"string",
+					"column_name":"Datapath",
+					"contains":[
+						"dpid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.data.*.switches.*.connectedSince",
+					"data_type":"string",
+					"column_name":"Connected Since",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.data.*.switches.*.ip",
+					"data_type":"string",
+					"column_name":"Source IP Address",
+					"contains":[
+						"ip"
+					],
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.data.*.switches.*.port",
+					"data_type":"numeric",
+					"column_name":"Source Port",
+					"column_order":3
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"list internal links",
+			"description":"List single-hop links discovered via LLDP.",
+			"type":"investigate",
+			"identifier":"list_internal_links",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":12,
+				"title":"List Internal Links",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.links.*.src-switch",
+					"data_type":"string",
+					"column_name":"Source Datapath",
+					"contains":[
+						"dpid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.data.*.links.*.src-port",
+					"data_type":"numeric",
+					"column_name":"Source Dataport",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.data.*.links.*.dst-switch",
+					"data_type":"string",
+					"column_name":"Destination Datapath",
+					"contains":[
+						"dpid"
+					],
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.data.*.links.*.dst-port",
+					"data_type":"numeric",
+					"column_name":"Destination Dataport",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.data.*.links.*.type",
+					"data_type":"string",
+					"column_name":"Link Type",
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.data.*.links.*.direction",
+					"data_type":"string",
+					"column_name":"Direction",
+					"column_order":5
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"list external links",
+			"description":"List multi-hop links discovered via BDDP.",
+			"type":"investigate",
+			"identifier":"list_external_links",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":12,
+				"title":"List External Links",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.links.*.src-switch",
+					"data_type":"string",
+					"column_name":"Source Datapath",
+					"contains":[
+						"dpid"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.data.*.links.*.src-port",
+					"data_type":"numeric",
+					"column_name":"Source Dataport",
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.data.*.links.*.dst-switch",
+					"data_type":"string",
+					"column_name":"Destination Datapath",
+					"contains":[
+						"dpid"
+					],
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.data.*.links.*.dst-port",
+					"data_type":"numeric",
+					"column_name":"Destination Dataport",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.data.*.links.*.type",
+					"data_type":"string",
+					"column_name":"Link Type",
+					"column_order":4
+				},
+				{
+					"data_path":"action_result.data.*.links.*.direction",
+					"data_type":"string",
+					"column_name":"Direction",
+					"column_order":5
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"list devices",
+			"description":"List devices tracked by the SDN controller.",
+			"type":"investigate",
+			"identifier":"list_devices",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":12,
+				"title":"List Devices",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.devices.*.mac",
+					"data_type":"string",
+					"column_name":"MAC Address",
+					"contains":[
+						"mac address"
+					],
+					"column_order":0
+				},
+				{
+					"data_path":"action_result.data.*.devices.*.ip",
+					"data_type":"string",
+					"column_name":"IP Address",
+					"contains":[
+						"ip"
+					],
+					"column_order":2
+				},
+				{
+					"data_path":"action_result.data.*.devices.*.vlan",
+					"data_type":"string",
+					"column_name":"VLAN",
+					"contains":[
+						"vlan"
+					],
+					"column_order":1
+				},
+				{
+					"data_path":"action_result.data.*.devices.*.lastSeen",
+					"data_type":"string",
+					"column_name":"Last Seen",
+					"column_order":3
+				},
+				{
+					"data_path":"action_result.data.*.devices.*.attachmentPoint.port",
+					"data_type":"numeric",
+					"column_name":"Dataport",
+					"column_order":5
+				},
+				{
+					"data_path":"action_result.data.*.devices.*.attachmentPoint.switchDPID",
+					"data_type":"string",
+					"column_name":"Datapath",
+					"contains":[
+						"dpid"
+					],
+					"column_order":4
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"get uptime",
+			"description":"Get time since SDN controller startup.",
+			"type":"generic",
+			"identifier":"get_uptime",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":12,
+				"title":"Get Uptime",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.systemUptimeMsec",
+					"column_name":"Uptime (ms)",
+					"column_order":0,
+					"data_type":"numeric"
+				},
+				{
+					"data_path":"action_result.data.*.hhmmss",
+					"column_name":"Uptime (hh:mm:ss.xxx)",
+					"column_order":1,
+					"data_type":"string"
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"list static flows",
+			"description":"List static flow rules.",
+			"type":"investigate",
+			"identifier":"list_static_flows",
+			"read_only":true,
+			"parameters":{
+				
+			},
+			"render":{
+				"width":12,
+				"title":"List Static Flows",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.flows.*.name",
+					"column_name":"Flow Name",
+					"contains":[
+						"flow name"
+					],
+					"column_order":0,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.switch",
+					"contains":[
+						"dpid"
+					],
+					"column_name":"Datapath",
+					"column_order":1,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.priority",
+					"column_name":"Priority",
+					"column_order":2,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.cookie",
+					"column_name":"Cookie",
+					"column_order":3,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.match",
+					"column_name":"Match",
+					"column_order":4,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.instructions",
+					"column_name":"Instructions",
+					"column_order":5,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.hardTimeoutSec",
+					"column_name":"Hard Timeout",
+					"column_order":6,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.idleTimeoutSec",
+					"column_name":"Idle Timeout",
+					"column_order":7,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.command",
+					"column_name":"Command",
+					"column_order":8,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.cookieMask",
+					"column_name":"Cookie Mask",
+					"column_order":9,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.outPort",
+					"column_name":"Output Port",
+					"column_order":10,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.outGroup",
+					"column_name":"Output Group",
+					"column_order":11,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.version",
+					"column_name":"OpenFlow Version",
+					"column_order":12,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.flows.*.flags",
+					"column_name":"Flags",
+					"column_order":13,
+					"data_type":"string"
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"add static flow",
+			"description":"Add a static flow rule.",
+			"type":"generic",
+			"identifier":"add_static_flow",
+			"read_only":false,
+			"parameters":{
+				"name":{
+					"description":"unique name for this flow",
+					"data_type":"string",
+					"contains":[
+						"flow name"
+					],
+					"required":true,
+					"primary":true
+				},
+				"switch":{
+					"description":"datapath processing the flow",
+					"data_type":"string",
+					"contains":[
+						"dpid"
+					],
+					"required":true
+				},
+				"table":{
+					"description":"table where flow will be installed (default: 0)",
+					"data_type":"numeric",
+					"required":false
+				},
+				"priority":{
+					"description":"priority (32-bit unsigned) (default: 2147483647)",
+					"data_type":"numeric",
+					"required":false
+				},
+				"match":{
+					"description":"packet match fields (default: match all packets)",
+					"data_type":"string",
+					"required":false
+				},
+				"instructions":{
+					"description":"instructions to perform (default: drop)",
+					"data_type":"string",
+					"required":false
+				},
+				"hard_timeout":{
+					"description":"hard timeout in seconds (default: no timeout)",
+					"data_type":"numeric",
+					"required":false
+				},
+				"idle_timeout":{
+					"description":"idle timeout in seconds (default: no timeout)",
+					"data_type":"numeric",
+					"required":false
+				},
+				"cookie":{
+					"description":"cookie (64-bit number) (default: no cookie)",
+					"data_type":"numeric",
+					"required":false
+				}
+				
+			},
+			"render":{
+				"width":12,
+				"title":"Add Static Flow",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.status",
+					"column_name":"Status Message",
+					"column_order":0,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.success",
+					"column_name":"Success?",
+					"column_order":1,
+					"data_type":"boolean"
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"delete static flow",
+			"description":"Remove a static flow rule.",
+			"type":"generic",
+			"identifier":"delete_static_flow",
+			"read_only":false,
+			"parameters":{
+				"name":{
+					"description":"name of flow to delete",
+					"data_type":"string",
+					"contains":[
+						"flow name"
+					],
+					"required":true,
+					"primary":true
+				}
+				
+			},
+			"render":{
+				"width":12,
+				"title":"Delete Static Flow",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.status",
+					"column_name":"Status Message",
+					"column_order":0,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.success",
+					"column_name":"Success?",
+					"column_order":1,
+					"data_type":"boolean"
+				}
+				
+			],
+			"versions":"EQ(*)"
+		},
+		{
+			"action":"clear static flows",
+			"description":"Remove all static flow rules.",
+			"type":"generic",
+			"identifier":"clear_static_flows",
+			"read_only":false,
+			"parameters":{
+				"switch_id":{
+					"description":"datapath where flows will be cleared",
+					"data_type":"string",
+					"contains":[
+						"dpid"
+					],
+					"required":false
+				}
+				
+			},
+			"render":{
+				"width":12,
+				"title":"Clear Static Flows",
+				"type":"table",
+				"height":5
+			},
+			"output":[
+				{
+					"data_path":"action_result.data.*.status",
+					"column_name":"Status Message",
+					"column_order":0,
+					"data_type":"string"
+				},
+				{
+					"data_path":"action_result.data.*.success",
+					"column_name":"Success?",
+					"column_order":1,
+					"data_type":"boolean"
+				}
+				
+			],
+			"versions":"EQ(*)"
+		}
+		
+	]
+}

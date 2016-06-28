@@ -1,0 +1,4 @@
+**.pyc
+*.tgz
+compile_app.py
+create_output.py

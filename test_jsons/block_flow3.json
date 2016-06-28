@@ -1,0 +1,16 @@
+{
+    "app_config": null,
+    "asset_id": "22",
+    "config": {
+        "url": "http://127.0.0.1:8080"
+    },
+    "debug_level": 3,
+    "identifier": "block_flow",
+    "parameters": [
+        { 
+                "dst-mac": "08:0a:0b:0c:0d:0e",
+	        "switchid": "dpid:00-00-00-00-00-00-00-01",
+	        "priority": 32001
+       }
+    ]
+}

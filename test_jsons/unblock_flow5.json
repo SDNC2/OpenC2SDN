@@ -1,0 +1,16 @@
+{
+    "app_config": null,
+    "asset_id": "22",
+    "config": {
+        "url": "http://127.0.0.1:8080"
+    },
+    "debug_level": 3,
+    "identifier": "unblock_flow",
+    "parameters": [
+        { 
+        	"src-ip": "10.0.0.1",
+	        "switchid": "dpid:00-00-00-00-00-00-00-01",
+	        "priority": 32001
+       }
+    ]
+}

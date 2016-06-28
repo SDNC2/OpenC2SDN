@@ -1,0 +1,14 @@
+{
+    "app_config": null,
+    "asset_id": "22",
+    "config": {
+        "url": "http://127.0.0.1:8080"
+    },
+    "debug_level": 3,
+    "identifier": "delete_firewall_rule",
+    "parameters": [
+        { 
+            "activityid" : "firewall_rule:-775620352"
+       }
+    ]
+}
